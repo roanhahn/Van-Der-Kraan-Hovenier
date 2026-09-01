@@ -1,0 +1,486 @@
+<!--
+DIRECTION CONTRACT
+THESIS: het gouden vakmanschap van de flyer vertaald naar een licht, luchtig daglicht-canvas — gebroken wit als basis, zwart doelgericht (nav/footer/hero-tekst), goud als scherp accent, nooit als zware achtergrond.
+OWN-WORLD: cream #FAF7F0 + ink #15140F + gold #C9A227/#E8C468, Fraunces (display, gespatieerde labels) + Inter (body), ruime witruimte, lijniconen in goud, sticky-stackende dienstenkaarten met afgeronde hoeken.
+STORY: huiseigenaar in Katwijk e.o. ziet direct werkgebied + belofte, scrolt door 7 diensten die stapelsgewijs over elkaar schuiven, bouwt vertrouwen via over-ons en sfeerbeelden, vraagt via het altijd-bereikbare contactformulier een afspraak aan.
+FIRST VIEWPORT: full-bleed daglichtfoto (heggenpad, blauwe lucht) met gebroken-wit tekstpaneel linksonder (geen zware donkere overlay), gespatieerd goud label, grote Fraunces kop, gouden CTA + "bel direct"-link; sticky ink-navbar met beeldmerk + altijd zichtbare belknop.
+FORM: Restrained kleurstrategie, direct uitgewerkt vanuit de klant-briefing en het aangeleverde flyer-merk; concept-tournament overgeslagen — richting is gepind door brief + flyer + de door de gebruiker aangedragen referentie (Sequoia sticky-cards).
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hovenier in Katwijk | Van der Kraan Hoveniers</title>
+<meta name="description" content="Van der Kraan Hoveniers is uw hovenier in Katwijk e.o. voor snoeien, stronken frezen, beplanting, graszoden, schuttingen en straatwerk. Vraag vrijblijvend een afspraak aan.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Van der Kraan Hoveniers | Hovenier in Katwijk">
+<meta property="og:description" content="Voor al uw tuinwerkzaamheden: vakkundig en persoonlijk hovenier in Katwijk, Leiden, Wassenaar en Noordwijk.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/hero.jpg">
+
+<!-- Favicon (inline gold sprig mark) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2315140F'/%3E%3Cpath d='M32 10 L44 34 L38 34 L32 22 L26 34 L20 34 Z' fill='%23C9A227'/%3E%3Crect x='30' y='34' width='4' height='10' fill='%23C9A227'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "Van der Kraan Hoveniers",
+  "description": "Hovenier in Katwijk voor snoeien, stronken frezen, beplanting, onkruidbestrijding, graszoden, schuttingen en straatwerk.",
+  "telephone": "+31685103892",
+  "email": "info@vdkraanhoveniers.nl",
+  "areaServed": ["Katwijk", "Leiden", "Wassenaar", "Noordwijk"],
+  "priceRange": "€€",
+  "slogan": "Voor al uw tuinwerkzaamheden"
+}
+</script>
+</head>
+<body>
+<a class="visually-hidden-focusable skip-link" href="#hoofdinhoud">Direct naar inhoud</a>
+
+<!-- ============ ICON SPRITE ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" class="visually-hidden" aria-hidden="true">
+  <defs>
+    <symbol id="icon-brandmark" viewBox="0 0 120 90">
+      <path d="M20 52 L32 24 L38 36 L44 12 L50 34 L56 20 L64 52 Z" fill="currentColor"/>
+      <rect x="45" y="52" width="6" height="14" fill="currentColor"/>
+      <path d="M6 74 C 26 62, 40 62, 60 70 C 80 78, 96 66, 114 58" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <!-- Onderstaande dienst- en UI-iconen zijn overgenomen van Lucide (ISC-licentie, lucide.dev) -->
+    <symbol id="icon-snoeien" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="6" cy="6" r="3"/>
+      <path d="M8.12 8.12 12 12"/>
+      <path d="M20 4 8.12 15.88"/>
+      <circle cx="6" cy="18" r="3"/>
+      <path d="M14.8 14.8 20 20"/>
+    </symbol>
+    <symbol id="icon-stronk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m14 12-8.381 8.38a1 1 0 0 1-3.001-3L11 9"/>
+      <path d="M15 15.5a.5.5 0 0 0 .5.5A6.5 6.5 0 0 0 22 9.5a.5.5 0 0 0-.5-.5h-1.672a2 2 0 0 1-1.414-.586l-5.062-5.062a1.205 1.205 0 0 0-1.704 0L9.352 5.648a1.205 1.205 0 0 0 0 1.704l5.062 5.062A2 2 0 0 1 15 13.828z"/>
+    </symbol>
+    <symbol id="icon-beplanting" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"/>
+      <circle cx="12" cy="8" r="2"/>
+      <path d="M12 10v12"/>
+      <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"/>
+      <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"/>
+    </symbol>
+    <symbol id="icon-onkruid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+    </symbol>
+    <symbol id="icon-graszoden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="18" height="18" x="3" y="3" rx="2"/>
+      <path d="M21 9H3"/>
+      <path d="M21 15H3"/>
+    </symbol>
+    <symbol id="icon-schutting" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 3 2 5v15c0 .6.4 1 1 1h2c.6 0 1-.4 1-1V5Z"/>
+      <path d="M6 8h4"/>
+      <path d="M6 18h4"/>
+      <path d="m12 3-2 2v15c0 .6.4 1 1 1h2c.6 0 1-.4 1-1V5Z"/>
+      <path d="M14 8h4"/>
+      <path d="M14 18h4"/>
+      <path d="m20 3-2 2v15c0 .6.4 1 1 1h2c.6 0 1-.4 1-1V5Z"/>
+    </symbol>
+    <symbol id="icon-straatwerk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3v18"/>
+      <path d="M3 12h18"/>
+      <rect x="3" y="3" width="18" height="18" rx="2"/>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21.801 10A10 10 0 1 1 17 3.335"/>
+      <path d="m9 11 3 3L22 4"/>
+    </symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+      <circle cx="12" cy="10" r="3"/>
+    </symbol>
+    <symbol id="icon-quote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/>
+      <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
+      <path d="M10 9H8"/>
+      <path d="M16 13H8"/>
+      <path d="M16 17H8"/>
+    </symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 6v6l4 2"/>
+    </symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>
+    </symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>
+      <rect x="2" y="4" width="20" height="16" rx="2"/>
+    </symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14"/>
+      <path d="m12 5 7 7-7 7"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container site-header__inner">
+      <a class="brand" href="#top" aria-label="Van der Kraan Hoveniers, naar boven">
+        <svg class="brand__mark" viewBox="0 0 120 90" aria-hidden="true"><use href="#icon-brandmark"/></svg>
+        <span class="brand__text">
+          <span class="brand__name">Van der Kraan</span>
+          <span class="brand__sub">Hoveniers</span>
+        </span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Menu wisselen">
+        <span class="navbar-toggler-icon-custom">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav main-nav">
+          <li class="nav-item"><a class="nav-link" href="#diensten">Diensten</a></li>
+          <li class="nav-item"><a class="nav-link" href="#over-ons">Over ons</a></li>
+          <li class="nav-item"><a class="nav-link" href="#galerij">Galerij</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <a href="tel:+31685103892" class="btn btn-call d-lg-none mt-3">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-phone"/></svg>
+          06 85103892
+        </a>
+      </div>
+
+      <a href="tel:+31685103892" class="btn btn-call d-none d-lg-inline-flex">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-phone"/></svg>
+        Bel direct: 06 85103892
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main id="hoofdinhoud">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="hero__media">
+      <img src="images/hero.jpg" alt="Zonnig heggenpad met fris, verzorgd groen, sfeerbeeld bij Van der Kraan Hoveniers" fetchpriority="high">
+      <div class="hero__scrim"></div>
+    </div>
+    <div class="container hero__container">
+      <div class="hero__panel">
+        <p class="kicker">Hovenier in Katwijk e.o.</p>
+        <h1 class="hero__title">Uw tuin in<br>vertrouwde handen</h1>
+        <p class="hero__subtitle">Van der Kraan Hoveniers verzorgt, herstelt en vernieuwt tuinen in Katwijk, Leiden, Wassenaar en Noordwijk: vakkundig, persoonlijk en zonder poeha.</p>
+        <div class="hero__actions">
+          <a href="#contact" class="btn btn-gold btn-lg">Vraag vrijblijvend een afspraak aan</a>
+          <a href="tel:+31685103892" class="hero__call">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-phone"/></svg>
+            Bel direct: 06 85103892
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ USP BAR ============ -->
+  <section class="usp-bar">
+    <div class="container">
+      <ul class="usp-bar__list">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check"/></svg>Vakkundig &amp; betrouwbaar</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin"/></svg>Regio Katwijk e.o.</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-quote"/></svg>Vrijblijvende offerte</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-clock"/></svg>Snel geholpen</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ DIENSTEN ============ -->
+  <section class="diensten" id="diensten">
+    <div class="container diensten__intro">
+      <p class="kicker">Onze diensten</p>
+      <h2 class="section-title">Voor al uw tuinwerkzaamheden</h2>
+      <p class="section-lead">Van een grondige snoeibeurt tot een compleet nieuwe tuin: ontdek wat we voor uw tuin in Katwijk en omgeving kunnen betekenen.</p>
+    </div>
+
+    <div class="service-stack">
+
+      <article class="service-card" style="--stack-i:0;">
+        <div class="service-card__inner">
+          <div class="service-card__media">
+            <img src="images/service-snoeien.jpg" alt="Hovenier snoeit een heg met een heggenschaar in een tuin in Katwijk" loading="lazy">
+          </div>
+          <div class="service-card__body">
+            <span class="service-card__icon"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-snoeien"/></svg></span>
+            <p class="service-card__label">01 · Snoeien</p>
+            <h3>Snoeien van bomen &amp; struiken</h3>
+            <p>Regelmatig snoeien houdt bomen en struiken gezond en in vorm. Als hovenier in Katwijk snoeien wij vakkundig op het juiste moment, zodat uw beplanting sterk blijft en uw tuin er verzorgd uitziet.</p>
+            <a href="#contact" class="service-card__cta">Offerte aanvragen <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" style="--stack-i:1;">
+        <div class="service-card__inner">
+          <div class="service-card__media">
+            <img src="images/service-stronken.jpg" alt="Hovenier freest een boomstronk weg tot onder het maaiveld" loading="lazy">
+          </div>
+          <div class="service-card__body">
+            <span class="service-card__icon"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-stronk"/></svg></span>
+            <p class="service-card__label">02 · Stronken frezen</p>
+            <h3>Wegfrezen van boomstronken</h3>
+            <p>Een oude boomstronk in de weg? Wij frezen boomstronken in Katwijk en omgeving tot ruim onder het maaiveld weg, zodat u de plek weer vrij kunt gebruiken voor gazon, beplanting of bestrating.</p>
+            <a href="#contact" class="service-card__cta">Offerte aanvragen <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" style="--stack-i:2;">
+        <div class="service-card__inner">
+          <div class="service-card__media">
+            <img src="images/service-beplanting.jpg" alt="Hovenier plant nieuwe beplanting in een border" loading="lazy">
+          </div>
+          <div class="service-card__body">
+            <span class="service-card__icon"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-beplanting"/></svg></span>
+            <p class="service-card__label">03 · Beplanting</p>
+            <h3>Beplanting</h3>
+            <p>Van borders tot een complete beplanting: wij adviseren over passende soorten voor uw tuin in Katwijk e.o. en zorgen voor een vakkundige aanplant die jarenlang meegaat.</p>
+            <a href="#contact" class="service-card__cta">Offerte aanvragen <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" style="--stack-i:3;">
+        <div class="service-card__inner">
+          <div class="service-card__media">
+            <img src="images/service-onkruid.jpg" alt="Onkruid verwijderen uit een border in een tuin" loading="lazy">
+          </div>
+          <div class="service-card__body">
+            <span class="service-card__icon"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-onkruid"/></svg></span>
+            <p class="service-card__label">04 · Onkruid verwijderen</p>
+            <h3>Onkruid verwijderen</h3>
+            <p>Onkruid tussen tegels of in borders? Wij verwijderen het grondig en denken mee over duurzame oplossingen, zodat uw tuin in Katwijk langer onkruidvrij blijft.</p>
+            <a href="#contact" class="service-card__cta">Offerte aanvragen <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" style="--stack-i:4;">
+        <div class="service-card__inner">
+          <div class="service-card__media">
+            <img src="images/service-graszoden.jpg" alt="Hovenier legt vers gemaaide graszoden aan voor een nieuw gazon" loading="lazy">
+          </div>
+          <div class="service-card__body">
+            <span class="service-card__icon"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-graszoden"/></svg></span>
+            <p class="service-card__label">05 · Graszoden</p>
+            <h3>Graszoden aanleggen</h3>
+            <p>Voor een strak en direct bruikbaar gazon leggen wij graszoden vakkundig aan, inclusief grondbewerking, ideaal als u snel van een kale plek naar een groen gazon wilt in Katwijk en omstreken.</p>
+            <a href="#contact" class="service-card__cta">Offerte aanvragen <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" style="--stack-i:5;">
+        <div class="service-card__inner">
+          <div class="service-card__media">
+            <img src="images/service-schutting.jpg" alt="Houten schutting geplaatst in een tuin, tegen een blauwe lucht" loading="lazy">
+          </div>
+          <div class="service-card__body">
+            <span class="service-card__icon"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-schutting"/></svg></span>
+            <p class="service-card__label">06 · Schutting</p>
+            <h3>Schutting plaatsen</h3>
+            <p>Wij plaatsen duurzame schuttingen op maat, passend bij uw tuin en woning, voor meer privacy en een verzorgde uitstraling, vakkundig geplaatst en stevig verankerd.</p>
+            <a href="#contact" class="service-card__cta">Offerte aanvragen <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card" style="--stack-i:6;">
+        <div class="service-card__inner">
+          <div class="service-card__media">
+            <img src="images/service-straatwerk.jpg" alt="Strak aangelegd straatwerk met sierbestrating in een tuin" loading="lazy">
+          </div>
+          <div class="service-card__body">
+            <span class="service-card__icon"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-straatwerk"/></svg></span>
+            <p class="service-card__label">07 · Straatwerk</p>
+            <h3>Straatwerk</h3>
+            <p>Van een terras tot een tuinpad: wij verzorgen straatwerk met oog voor detail, zodat bestrating en beplanting in Katwijk e.o. een geheel vormen.</p>
+            <a href="#contact" class="service-card__cta">Offerte aanvragen <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ OVER ONS ============ -->
+  <section class="over-ons" id="over-ons">
+    <div class="container">
+      <div class="over-ons__grid">
+        <div class="over-ons__media">
+          <img src="images/over-ons.jpg" alt="Hovenier van Van der Kraan Hoveniers aan het werk in een tuin op een zonnige dag" loading="lazy">
+        </div>
+        <div class="over-ons__body">
+          <p class="kicker">Over ons</p>
+          <h2 class="section-title">Vakmanschap met de<br>voeten in de klei</h2>
+          <p>Van der Kraan Hoveniers is uw lokale hovenier in Katwijk, met oog voor detail en een persoonlijke aanpak. Of het nu gaat om regulier onderhoud of een complete tuinaanleg: wij werken zorgvuldig, denken met u mee en leveren werk waar u jarenlang plezier van heeft.</p>
+          <p>Actief in Katwijk, Leiden, Wassenaar, Noordwijk en omstreken, met altijd rechtstreeks contact en geen tussenpersonen.</p>
+          <a href="#contact" class="btn btn-ink-outline">Neem vrijblijvend contact op</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALERIJ ============ -->
+  <section class="galerij" id="galerij">
+    <div class="container">
+      <p class="kicker kicker--center">Sfeerbeelden</p>
+      <h2 class="section-title section-title--center">Een greep uit ons werkgebied</h2>
+      <div class="galerij__grid">
+        <div class="galerij__item galerij__item--tall"><img src="images/gallery-1.jpg" alt="Fris gemaaid gazon met verzorgde border bij een woning in Katwijk e.o." loading="lazy"></div>
+        <div class="galerij__item"><img src="images/gallery-2.jpg" alt="Kleurrijke border met bloeiende beplanting en een strakke heg" loading="lazy"></div>
+        <div class="galerij__item galerij__item--tall"><img src="images/gallery-3.jpg" alt="Rond bestraat terras met lage border en groene beplanting" loading="lazy"></div>
+        <div class="galerij__item galerij__item--tall"><img src="images/gallery-4.jpg" alt="Slingerend tuinpad tussen strak geschoren heggen" loading="lazy"></div>
+        <div class="galerij__item"><img src="images/gallery-5.jpg" alt="Zithoek in de tuin met tafel, stoelen en parasol tussen het groen" loading="lazy"></div>
+        <div class="galerij__item"><img src="images/gallery-6.jpg" alt="Bloeiende border met wilde bloemen onder een blauwe lucht" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact__grid">
+        <div class="contact__intro">
+          <p class="kicker">Contact</p>
+          <h2 class="section-title">Vraag vrijblijvend<br>een afspraak aan</h2>
+          <p class="section-lead">Vul het formulier in of neem direct contact op: we reageren snel en denken graag vrijblijvend met u mee.</p>
+
+          <ul class="contact__list">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-phone"/></svg>
+              <a href="tel:+31685103892">06 85103892</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mail"/></svg>
+              <a href="mailto:info@vdkraanhoveniers.nl">info@vdkraanhoveniers.nl</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin"/></svg>
+              <span>Werkgebied: Katwijk, Leiden, Wassenaar, Noordwijk e.o.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact__form-wrap">
+          <form class="contact-form needs-validation" id="contactForm" action="https://formspree.io/f/VUL_HIER_UW_FORMSPREE_ID_IN" method="POST" novalidate>
+            <div class="mb-3">
+              <label for="naam" class="form-label">Naam</label>
+              <input type="text" class="form-control" id="naam" name="naam" required>
+              <div class="invalid-feedback">Vul uw naam in.</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                <div class="invalid-feedback">Vul een geldig e-mailadres in.</div>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <label for="telefoon" class="form-label">Telefoon</label>
+                <input type="tel" class="form-control" id="telefoon" name="telefoon">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="dienst" class="form-label">Gewenste dienst</label>
+              <select class="form-select" id="dienst" name="dienst" required>
+                <option value="" selected disabled>Kies een dienst…</option>
+                <option>Snoeien van bomen &amp; struiken</option>
+                <option>Wegfrezen van boomstronken</option>
+                <option>Beplanting</option>
+                <option>Onkruid verwijderen</option>
+                <option>Graszoden aanleggen</option>
+                <option>Schutting plaatsen</option>
+                <option>Straatwerk</option>
+                <option>Anders / weet ik nog niet</option>
+              </select>
+              <div class="invalid-feedback">Kies een dienst.</div>
+            </div>
+            <div class="mb-4">
+              <label for="bericht" class="form-label">Bericht</label>
+              <textarea class="form-control" id="bericht" name="bericht" rows="4" required></textarea>
+              <div class="invalid-feedback">Laat ons weten waar we mee kunnen helpen.</div>
+            </div>
+            <button type="submit" class="btn btn-gold btn-lg w-100">Vraag aan</button>
+            <p class="contact-form__status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <a class="brand brand--footer" href="#top" aria-label="Van der Kraan Hoveniers, naar boven">
+          <svg class="brand__mark" viewBox="0 0 120 90" aria-hidden="true"><use href="#icon-brandmark"/></svg>
+          <span class="brand__text">
+            <span class="brand__name">Van der Kraan</span>
+            <span class="brand__sub">Hoveniers</span>
+          </span>
+        </a>
+        <p>Voor al uw tuinwerkzaamheden.</p>
+      </div>
+
+      <div class="site-footer__col">
+        <h3>Diensten</h3>
+        <ul>
+          <li><a href="#diensten">Snoeien van bomen &amp; struiken</a></li>
+          <li><a href="#diensten">Wegfrezen van boomstronken</a></li>
+          <li><a href="#diensten">Beplanting</a></li>
+          <li><a href="#diensten">Onkruid verwijderen</a></li>
+          <li><a href="#diensten">Graszoden aanleggen</a></li>
+          <li><a href="#diensten">Schutting plaatsen</a></li>
+          <li><a href="#diensten">Straatwerk</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:+31685103892">06 85103892</a></li>
+          <li><a href="mailto:info@vdkraanhoveniers.nl">info@vdkraanhoveniers.nl</a></li>
+          <li>Werkgebied: Katwijk e.o.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>© <span id="year">2026</span> Van der Kraan Hoveniers. Alle rechten voorbehouden.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MOBILE FAB ============ -->
+<a href="tel:+31685103892" class="mobile-fab d-lg-none" aria-label="Bel Van der Kraan Hoveniers direct">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-phone"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
