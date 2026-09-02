@@ -24,7 +24,7 @@ Kleine, vakkundige lokale hovenier in Katwijk — persoonlijk en betrouwbaar, ge
 
 ## Operating Context
 
-Bezoeker komt via lokale zoekopdracht (SEO) of mond-tot-mondreclame, bekijkt diensten, en vraagt via het contactformulier een vrijblijvende afspraak/offerte aan, of belt/mailt direct. Geen bezoeklocatie/showroom — werkgebied is regio Katwijk. Contactformulier verstuurt via Formspree (front-end validatie + Formspree POST, geen eigen backend).
+Bezoeker komt via lokale zoekopdracht (SEO) of mond-tot-mondreclame, bekijkt diensten, en vraagt via het contactformulier een vrijblijvende afspraak/offerte aan, of belt/mailt direct. Geen bezoeklocatie/showroom — werkgebied is regio Katwijk. Contactformulier verstuurt via Formspree (front-end validatie + Formspree POST, geen eigen backend); actief form-ID `myeyerqq`, verzendt naar info@vdkraanhoveniers.nl.
 
 ## Capabilities and Constraints
 
@@ -51,7 +51,9 @@ Beeldmateriaal: geen eigen foto's beschikbaar op dit moment — site wordt gebou
 
 ## Evidence on Hand
 
-Aangeleverd: logo/flyer-afbeelding (`van der kraan hoveniers.png`) als merkreferentie, en een uitgebreide klant-briefing (`briefing-van-der-kraan-hoveniers.md`) met paginastructuur, SEO-uitgangspunten en tone-of-voice-richtlijnen. Geen eigen tuinfoto's beschikbaar — gebruik placeholders totdat de klant eigen beeldmateriaal aanlevert. Geen testimonials/social proof aangeleverd — niet verzinnen.
+Aangeleverd: logo/flyer-afbeelding (`van der kraan hoveniers.png`) als merkreferentie, en een uitgebreide klant-briefing (`briefing-van-der-kraan-hoveniers.md`) met paginastructuur, SEO-uitgangspunten en tone-of-voice-richtlijnen. Geen eigen tuinfoto's beschikbaar — placeholders (Unsplash, royalty-free) totdat de klant eigen beeldmateriaal aanlevert, op klantverzoek als hoge-resolutie `.webp` (1600px+, hero 2400px). Geen testimonials/social proof aangeleverd — niet verzinnen.
+
+Klant heeft [sequoia-gardening.webflow.io](https://sequoia-gardening.webflow.io) als losse referentie aangedragen voor de sticky-stack dienstensectie, de typografie (Butler + Jost) én de transparante header-over-hero; zie [DESIGN.md](DESIGN.md) voor hoe dit is verwerkt (Butler zelf is een ongelicentieerd commercieel font, opgelost via Fraunces' SOFT-as). Klant vroeg expliciet om de hero-foto avond-/lantaarnverlicht te maken (dichter bij de flyer-sfeer) — bewuste uitzondering op de daglicht-regel uit de briefing, alleen voor de hero. De uiteindelijke hero-foto (`images/hero.webp`) is een eigen beeld van de klant (Magnific-upscale, aangeleverd op 2560×1440), geen Unsplash-stock.
 
 ## Product Principles
 

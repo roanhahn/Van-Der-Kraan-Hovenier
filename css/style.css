@@ -1,8 +1,28 @@
 /* ============================================================
    Van der Kraan Hoveniers — huisstijl
    Gebroken wit basis · zwart gericht · goud accent
-   Fraunces (koppen) + Jost (body/labels)
+   Fraunces, warm/rond via de SOFT-as (koppen) + Jost (body/labels)
    ============================================================ */
+
+/* Zelf gehoste Fraunces-variofont (SOFT/WONK/opsz/wght) — geeft koppen het
+   warme, ronde, laag-contrast karakter dat de klant herkende in Butler
+   (commercieel font, niet zonder licentie te gebruiken). */
+@font-face {
+  font-family: "Fraunces Variable";
+  src: url("../fonts/Fraunces-Variable.woff2") format("woff2-variations"),
+       url("../fonts/Fraunces-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fraunces Variable";
+  src: url("../fonts/Fraunces-Italic-Variable.woff2") format("woff2-variations"),
+       url("../fonts/Fraunces-Italic-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
 
 :root {
   --cream: #FAF7F0;
@@ -16,20 +36,20 @@
   --gold-deep: #8A6A16;
   --line: rgba(21, 20, 15, 0.12);
 
-  --font-display: "Fraunces", "Iowan Old Style", ui-serif, Georgia, serif;
+  --font-display: "Fraunces Variable", "Fraunces", "Iowan Old Style", ui-serif, Georgia, serif;
   --font-body: "Jost", "Century Gothic", ui-sans-serif, system-ui, sans-serif;
 
   --container-pad: clamp(1.25rem, 4vw, 3rem);
   --radius-lg: 28px;
   --radius-md: 18px;
-  --shadow-card: 0 30px 60px -30px rgba(21, 20, 15, 0.28), 0 4px 14px -6px rgba(21, 20, 15, 0.12);
+  --header-h: 88px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 92px;
+  scroll-padding-top: var(--header-h); /* fallback; js/main.js scrollt zelf met de live header-hoogte */
 }
 
 body {
@@ -47,7 +67,7 @@ body {
   * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
 
-.container { max-width: 1200px; padding-left: var(--container-pad); padding-right: var(--container-pad); }
+.container { padding-left: var(--container-pad); padding-right: var(--container-pad); }
 
 a { color: inherit; text-decoration: none; }
 
@@ -76,18 +96,12 @@ h1, h2, h3, h4 {
   font-weight: 600;
   line-height: 1.12;
   margin: 0 0 0.6em;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  /* SOFT open + hoge opsz + WONK uit: warmer, ronder, laag-contrast — dicht bij het
+     Butler-karakter dat de klant herkende, zonder een ongelicentieerd font te gebruiken. */
+  font-variation-settings: "opsz" 144, "SOFT" 62, "WONK" 0;
 }
-
-.kicker {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.8rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--gold-deep);
-  margin: 0 0 0.9rem;
-}
-.kicker--center { text-align: center; }
 
 .section-title {
   font-size: clamp(2rem, 3.4vw, 2.9rem);
@@ -133,14 +147,16 @@ section { position: relative; }
 .btn-ink-outline:hover { background: var(--ink); color: var(--cream); }
 
 .btn-call {
-  background: var(--ink);
-  color: var(--gold-bright);
-  padding: 0.65rem 1.3rem;
+  background: transparent;
+  color: var(--cream);
+  border: 1.5px solid rgba(250, 247, 240, 0.45);
+  padding: 0.6rem 1.25rem;
   font-size: 0.95rem;
   white-space: nowrap;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
-.btn-call svg { stroke: var(--gold-bright); width: 1em; height: 1em; }
-.btn-call:hover { background: #26241a; color: var(--gold-bright); }
+.btn-call svg { stroke: currentColor; width: 1em; height: 1em; }
+.btn-call:hover { border-color: var(--gold-bright); color: var(--gold-bright); background: rgba(232, 196, 104, 0.08); }
 
 /* ============================================================
    HEADER
@@ -149,14 +165,26 @@ section { position: relative; }
   position: sticky;
   top: 0;
   z-index: 1000;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease;
+}
+/* Transparant over de hero-foto (zoals Sequoia); zodra er gescrold is (of op secties
+   zonder achtergrondfoto) krijgt de balk een vaste ink-achtergrond voor leesbaarheid. */
+.site-header.is-scrolled,
+.site-header.is-menu-open {
   background: var(--ink);
   border-bottom: 1px solid rgba(232, 196, 104, 0.15);
+  box-shadow: 0 12px 30px -18px rgba(21, 20, 15, 0.4);
 }
 
-.site-header__inner {
+/* Specificiteit (.site-header + .site-header__inner) is bewust gelijk aan Bootstrap's
+   eigen ".navbar > .container"-regel: bij een gelijke specificiteit wint de regel die
+   later in de cascade staat, en style.css laadt na bootstrap.min.css. */
+.site-header .site-header__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 1.5rem;
   padding-top: 0.85rem;
   padding-bottom: 0.85rem;
@@ -168,41 +196,76 @@ section { position: relative; }
   gap: 0.7rem;
   color: var(--gold-bright);
 }
-.brand__mark { width: 40px; height: 32px; color: var(--gold-bright); flex-shrink: 0; }
+.brand__mark { height: 40px; width: auto; flex-shrink: 0; }
 .brand__text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand__name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--cream); }
 .brand__sub { font-family: var(--font-body); font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-bright); }
 
-.main-nav { display: flex; gap: 0.4rem; align-items: center; }
+.main-nav { display: flex; gap: 1.75rem; align-items: center; }
 .main-nav .nav-link {
+  position: relative;
   font-family: var(--font-body);
   color: var(--cream);
-  opacity: 0.82;
+  opacity: 0.88;
   font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  transition: opacity 0.2s ease, background 0.2s ease;
+  padding: 0.4rem 0;
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
-.main-nav .nav-link:hover { opacity: 1; background: rgba(232, 196, 104, 0.12); color: var(--gold-bright); }
+.main-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: var(--gold-bright);
+  transition: right 0.25s ease;
+}
+.main-nav .nav-link:hover { opacity: 1; color: var(--gold-bright); }
+.main-nav .nav-link:hover::after { right: 0; }
 
 .navbar-toggler {
   border: none;
   background: transparent;
   padding: 0.4rem;
+  margin-left: auto;
 }
 .navbar-toggler:focus { box-shadow: none; }
 .navbar-toggler-icon-custom { display: flex; flex-direction: column; gap: 5px; width: 24px; }
 .navbar-toggler-icon-custom span { display: block; height: 2px; background: var(--gold-bright); border-radius: 2px; }
 
+@media (min-width: 992px) {
+  /* Bootstrap geeft .navbar-collapse flex-grow:1, waardoor het menu anders links in die
+     lege ruimte blijft hangen. .main-nav rechts binnen die ruimte duwen zet het menu
+     direct naast de belknop, als één groep. */
+  .site-header .main-nav { margin-left: auto; }
+}
+
 @media (max-width: 991.98px) {
+  /* --header-h wordt live gemeten in js/main.js (echte hoogte i.p.v. een geraden waarde). */
+
+  /* Menu als overlay LOS van de documentflow (i.p.v. de header hoger te maken en de content
+     omlaag te duwen): opent over de pagina heen, header/hero blijven precies zo hoog als ze zijn. */
   .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - var(--header-h));
+    overflow-y: auto;
     background: var(--ink);
-    margin-top: 1rem;
-    padding: 1rem 0 1.5rem;
+    margin-top: 0;
+    padding: 1rem var(--container-pad) 1.5rem;
     border-top: 1px solid rgba(232, 196, 104, 0.15);
+    box-shadow: 0 20px 40px -20px rgba(21, 20, 15, 0.5);
   }
   .main-nav { flex-direction: column; align-items: flex-start; width: 100%; }
   .main-nav .nav-link { width: 100%; padding: 0.65rem 0.25rem; }
+
+  /* Geen open/dicht-animatie: Bootstrap's collapse animeert standaard de hoogte (een
+     layout-eigenschap), wat op mobiel al snel hokkerig oogt. Direct tonen/verbergen. */
+  .navbar-collapse.collapsing {
+    transition: none;
+  }
 }
 
 /* ============================================================
@@ -210,46 +273,54 @@ section { position: relative; }
    ============================================================ */
 .hero {
   position: relative;
-  min-height: min(92vh, 820px);
+  /* 90vh minus de USP-balk eronder, zodat die balk ruim in beeld komt zonder scrollen.
+     svh (small viewport height) i.p.v. vh: vh volgt de in-/uitklappende adresbalk op
+     mobiel en laat de hero bij elke scroll van hoogte veranderen; svh blijft stabiel.
+     De vh-regel blijft als fallback staan voor browsers zonder svh-ondersteuning. */
+  min-height: min(calc(90vh - var(--header-h)), 820px);
+  min-height: min(calc(90svh - var(--header-h)), 820px);
+  margin-top: calc(-1 * var(--header-h));
+  padding-top: var(--header-h);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   overflow: hidden;
 }
 .hero__media { position: absolute; inset: 0; z-index: 0; }
-.hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 58%; }
 .hero__scrim {
   position: absolute; inset: 0;
-  background: linear-gradient(0deg, rgba(21,20,15,0.55) 0%, rgba(21,20,15,0.18) 42%, rgba(21,20,15,0.05) 65%, transparent 100%);
+  /* Gelijkmatige dimming over de hele foto (leesbaarheid + rust), iets steviger onderin
+     — tekst staat rechtstreeks op de foto, verticaal gecentreerd, geen kaart meer. */
+  background:
+    linear-gradient(0deg, rgba(10,10,8,0.70) 0%, rgba(10,10,8,0.4) 45%, rgba(10,10,8,0.28) 70%, rgba(10,10,8,0.22) 100%),
+    rgba(10, 10, 8, 0.18);
 }
-.hero__container { position: relative; z-index: 1; width: 100%; padding-bottom: clamp(2.5rem, 6vw, 5rem); }
+.hero__container { position: relative; z-index: 1; width: 100%; padding-bottom: clamp(4.5rem, 10vw, 8rem); }
 
-.hero__panel {
-  background: var(--cream);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.75rem, 3.4vw, 3rem);
-  max-width: 640px;
-  box-shadow: var(--shadow-card);
-}
+.hero__content { max-width: 640px; padding-top: clamp(2rem, 6vw, 4rem); }
 .hero__title {
+  color: var(--cream);
   font-size: clamp(2.3rem, 5vw, 3.6rem);
   margin-bottom: 0.5em;
 }
 .hero__subtitle {
   font-size: 1.1rem;
-  color: var(--ink-faint);
+  color: rgba(250, 247, 240, 0.82);
   max-width: 48ch;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.8rem;
 }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 1.75rem; }
-.hero__call {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-weight: 600; color: var(--ink);
-  border-bottom: 1.5px solid var(--gold-deep);
-  padding-bottom: 2px;
-  transition: color 0.2s ease, border-color 0.2s ease;
+
+@media (max-width: 400px) {
+  .hero__actions .btn-gold {
+    font-size: 0.9rem;
+    padding: 0.8rem 1.1rem;
+    white-space: nowrap;
+  }
+  .hero{
+    min-height: 600px;
+  }
 }
-.hero__call svg { width: 1.1em; height: 1.1em; stroke: var(--gold-deep); fill: none; }
-.hero__call:hover { color: var(--gold-deep); }
 
 /* ============================================================
    USP BAR
@@ -273,6 +344,10 @@ section { position: relative; }
   font-size: 0.98rem;
   white-space: nowrap;
 }
+
+@media (max-width: 576px) {
+  .usp-bar__list { flex-direction: column; align-items: center; gap: 0.85rem; }
+}
 .usp-bar__list svg { width: 1.3em; height: 1.3em; stroke: var(--gold-bright); fill: none; flex-shrink: 0; }
 
 /* ============================================================
@@ -284,26 +359,25 @@ section { position: relative; }
 .service-stack {
   display: flex;
   flex-direction: column;
-  padding: 0 var(--container-pad);
 }
 
 .service-card {
   position: sticky;
-  top: 96px;
+  top: calc(var(--header-h) + 8px);
   padding-top: clamp(0.75rem, 1.5vw, 1.25rem);
 }
 
 .service-card__inner {
-  max-width: 1200px;
-  margin: 0 auto;
   background: var(--cream-card);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
   overflow: hidden;
   display: grid;
   grid-template-columns: 1.05fr 1fr;
-  min-height: clamp(560px, calc(100vh - 116px), 860px);
+  /* svh i.p.v. vh: blijft stabiel als de mobiele adresbalk in-/uitklapt tijdens het scrollen
+     door de stapel (vh-regel blijft als fallback voor browsers zonder svh). */
+  min-height: clamp(420px, calc(100vh - var(--header-h) - 40px), 860px);
+  min-height: clamp(420px, calc(100svh - var(--header-h) - 40px), 860px);
 }
 
 .service-card__media { position: relative; overflow: hidden; }
@@ -324,15 +398,6 @@ section { position: relative; }
   color: var(--gold-deep);
 }
 .service-card__icon svg { width: 26px; height: 26px; fill: none; }
-.service-card__label {
-  font-family: var(--font-body);
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  color: var(--gold-deep);
-  margin-bottom: 0.5rem;
-}
 .service-card__body h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); margin-bottom: 0.65rem; }
 .service-card__body p { color: var(--ink-faint); margin-bottom: 1.5rem; max-width: 42ch; }
 .service-card__cta {
@@ -348,7 +413,8 @@ section { position: relative; }
 .service-card__cta:hover svg { transform: translateX(3px); }
 
 @media (max-width: 860px) {
-  /* Sticky-stack effect is een desktop-luxe; op kleine schermen scrollen kaarten gewoon normaal door. */
+  /* Sticky-stack effect is een desktop-luxe; op mobiel gaat leesbaarheid/viewport-ruimte voor,
+     dus scrollen de kaarten hier gewoon normaal door. */
   .service-card { position: static; top: auto; padding-top: 1.25rem; }
   .service-card__inner { grid-template-columns: 1fr; min-height: 0; }
   .service-card__media { height: 240px; }
@@ -365,7 +431,7 @@ section { position: relative; }
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
 }
-.over-ons__media { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); }
+.over-ons__media { border-radius: var(--radius-lg); overflow: hidden; }
 .over-ons__media img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/5; }
 .over-ons__body p { max-width: 52ch; }
 
@@ -398,7 +464,6 @@ section { position: relative; }
    CONTACT
    ============================================================ */
 .contact { padding: clamp(4rem, 9vw, 7rem) 0; background: var(--ink); color: var(--cream); }
-.contact .kicker { color: var(--gold-bright); }
 .contact .section-title { color: var(--cream); }
 .contact .section-lead { color: rgba(250, 247, 240, 0.7); }
 
@@ -418,7 +483,6 @@ section { position: relative; }
   background: var(--cream);
   border-radius: var(--radius-lg);
   padding: clamp(1.75rem, 3vw, 2.75rem);
-  box-shadow: var(--shadow-card);
 }
 
 .contact-form .form-label {
@@ -462,7 +526,7 @@ section { position: relative; }
   border-bottom: 1px solid rgba(232, 196, 104, 0.15);
 }
 .site-footer__brand p { margin-top: 1rem; color: rgba(250, 247, 240, 0.6); }
-.brand--footer .brand__mark { width: 52px; height: 42px; }
+.brand--footer .brand__mark { height: 52px; width: auto; }
 .brand--footer .brand__name { font-size: 1.3rem; }
 
 .site-footer__col h3 {
